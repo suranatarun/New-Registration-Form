@@ -1,0 +1,141 @@
+<style>
+    h1 {
+        text-align: center;
+        font-size: 50px;
+        font-weight: 800;
+        color: rgb(87, 85, 85);
+    }
+
+    p {
+        color: red;
+        text-align: right;
+        font-weight: 500;
+    }
+
+    b {
+        color: red;
+    }
+
+    .col-md-6, .col-md-12 {
+        margin-top: 15px;
+    }
+    input{
+        color:#000;
+        font-weight:500;
+    }
+</style>
+<div class="container m-2">
+    <h1>RegistrationForm</h1>
+    <p>* - All fields are mandatory</p>
+</div>
+<div class="container" [formGroup]="SaveFormData">
+    <div class="row">
+        <div class="col-md-6">
+            <mat-label>First Name <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Ex. John" [(ngModel)]="FirstName" formControlName="FirstName" minlength="2" maxlength="20" required>
+            <div *ngIf="FirstNameError" class="alert alert-danger">
+                <small>{{FirstNameError}}</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-label>Last Name <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Ex. Doche" [(ngModel)]="LastName" formControlName="LastName" minlength="2" maxlength="20" required>
+            <div *ngIf="LastNameError" class="alert alert-danger">
+                <small>{{LastNameError}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <mat-label>Choose Gender <b> *</b></mat-label>
+            <mat-select class="form-control" [(ngModel)]="selectedGender" formControlName="selectedGender" required>
+                <mat-option value="Male">Male</mat-option>
+                <mat-option value="Female">Female</mat-option>
+                <mat-option value="Transgender">Transgender</mat-option>
+            </mat-select>
+            <div *ngIf="selectedGenderError" class="alert alert-danger">
+                <small>{{selectedGenderError}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field appearance="fill" style="border:none;">
+                <mat-label>Choose a date <b> *</b></mat-label>
+                <input matInput [matDatepicker]="picker" [max]="maxDate" [(ngModel)]="DateOfBirth" formControlName="DateOfBirth" required>
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <div *ngIf="DateOfBirthError" class="alert alert-danger">
+                <small>{{DateOfBirthError}}</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-label>Age <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter Age" minlength="1" maxlength="2" [(ngModel)]="Age" formControlName="Age" required readonly>
+            <button class="btn btn-danger" (click)="CalAge()">Cal Age</button>
+            <div *ngIf="AgeError" class="alert alert-danger">
+                <small>{{AgeError}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-label>Address Line 1 <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter Address Line 1" minlength="3" maxlength="15" [(ngModel)]="AddressLine1" formControlName="AddressLine1" required>
+            <div *ngIf="AddressLine1Error" class="alert alert-danger">
+                <small>{{AddressLine1Error}}</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-label>Address Line 2 <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter Address Line 2" minlength="3" maxlength="15" [(ngModel)]="AddressLine2" formControlName="AddressLine2" required>
+            <div *ngIf="AddressLine2Error" class="alert alert-danger">
+                <small>{{AddressLine2Error}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-label>Phone Number <b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter Phone Number" minlength="7" maxlength="10" [(ngModel)]="PhoneNumber" formControlName="PhoneNumber" required>
+            <div *ngIf="PhoneNumberError" class="alert alert-danger">
+                <small>{{PhoneNumberError}}</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-label>PinCode<b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter Address Pincode" minlength="1" maxlength="6" [(ngModel)]="Pincode" formControlName="Pincode" required>
+            <button class="btn btn-danger" (click)="FetchData()">Get Data</button>
+            <div *ngIf="PincodeError" class="alert alert-danger">
+                <small>{{PincodeError}}</small>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <mat-label>Enter State<b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter State" minlength="3" maxlength="15" [(ngModel)]="State" formControlName="State" required readonly>
+            <div *ngIf="StateError" class="alert alert-danger">
+                <small>{{StateError}}</small>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <mat-label>Enter City<b> *</b></mat-label>
+            <input class="form-control" matInput placeholder="Enter City" minlength="3" maxlength="15" [(ngModel)]="City" formControlName="City" required readonly>
+            <div *ngIf="CityError" class="alert alert-danger">
+                <small>{{CityError}}</small>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        
+        <div class="col-md-6">
+            <button mat-raised-button class="btn btn-primary" (click)="SaveForm()">Save Form</button>
+        </div>
+        <div class="col-md-6">
+            <button mat-raised-button class="btn btn-primary" (click)="ViewForm()">View Form</button>
+        </div>
+    </div>
+</div>

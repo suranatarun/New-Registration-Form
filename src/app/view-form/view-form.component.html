@@ -1,0 +1,108 @@
+<style>
+    h1{
+        text-align: center;
+        font-weight:700;
+        font-size:50px;
+        padding-top:20px;
+    }
+    .container-box {
+        margin:0% 10%;
+        border-radius:10px;
+    }
+    .view {
+        box-shadow: 3px 3px 20px 3px rgb(80, 79, 79);
+        border-radius:10px;
+    }
+    h3 {
+        padding:5px;
+    }
+</style>
+<div class="container">
+    <h1>View Form</h1>
+</div>
+<div class="container-box" style="box-shadow: 3px 3px 20px 3px rgb(80, 79, 79); border-radius: 10px; padding:20px;">
+    <div *ngIf="WeatherData">
+        <div class="view text-center">
+            <img src="{{WeatherData.current.weather_icons[0]}}" alt="Icon of Weather">
+            <h4>{{WeatherData?.current.temperature}}°C</h4>
+            <h4>Feels Like: {{WeatherData?.current?.feelslike }}°C</h4>
+            <br>
+            <h4>{{WeatherData?.location?.name}}, {{WeatherData?.location.region}}</h4>
+            <h4>{{WeatherData?.location.timezone_id}}</h4>
+            <h4>Humidity: {{WeatherData?.current?.humidity}}%</h4>
+        </div>
+    </div>
+    
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-6">
+            <div class="view">
+                <h3>First Name:- {{FormData.FirstName}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Second Name:- {{FormData.LastName}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-12">
+            <div class="view">
+                <h3>Gender:- {{FormData.selectedGender}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Date of Birth:- {{FormData.DateOfBirth | date}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Age:- {{FormData.Age}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Address Line 1:- {{FormData.AddressLine1}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Address Line 2:- {{FormData.AddressLine2}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-6">
+            <div class="view">
+                <h3>Phone Number:- {{FormData.PhoneNumber}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="view">
+                <h3>PinCode:- {{FormData.Pincode}}</h3>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" *ngIf="FormData">
+        <div class="col-md-6">
+            <div class="view">
+                <h3>State:- {{FormData.State}}</h3>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="view">
+                <h3>City:- {{FormData.City}}</h3>
+            </div>
+        </div>
+    </div>
+</div>
